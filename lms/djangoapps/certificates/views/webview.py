@@ -309,14 +309,16 @@ def _update_social_context(request, context, course, user_certificate, platform_
         )
 
 def _update_context_with_user_score(context, user, user_certificate):
-
+    """
+    Updates context dictionary with user related info form courses.
+    """
     try:
 
 
          if context['display_score']:
             context['score_available'] = True
             from lms.djangoapps.grades.api import CourseGradeFactory
-            for user, course_grade, exc in CourseGradeFactory().iter(
+            for usr, course_grade, exc in CourseGradeFactory().iter(
                     [user], course_key=user_certificate.course_id):
                 context['course_grade']= "{:.0f}".format(course_grade.percent*100)
     except Exception as e:
