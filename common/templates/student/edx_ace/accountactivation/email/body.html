@@ -24,7 +24,7 @@
             </h1>
             <p style="color: rgba(0,0,0,.75);">
                 {% filter force_escape %}
-                    {% blocktrans %}¡Tu cuenta está casi lista! Haz clic en el enlace para activarla y acceder a la oferta educativa de la  {{ platform_name }} Una vez hecho esto, podrás iniciar sesión.Haz clic en el siguiente enlace: {% endblocktrans %}
+                    {% blocktrans %}¡Ya casi! Utiliza el enlace a continuación para activar tu cuenta y acceder a cursos de MexicoX atractivos y de alta calidad. Ten en cuenta que no podrás volver a iniciar sesión en tu cuenta hasta que la hayas activado. {% endblocktrans %}
                 {% endfilter %}
                 <br />
             </p>
@@ -39,7 +39,7 @@
         <td>
             <p style="color: rgba(0,0,0,.75);">
                 {% filter force_escape %}
-                    {% blocktrans %}Enjoy learning with {{ platform_name }}.{% endblocktrans %}
+                    {% blocktrans %}Disfruta aprendiendo con MexicoX.{% endblocktrans %}
                 {% endfilter %}
                 <br />
             </p>
@@ -48,7 +48,7 @@
         <td>
             <p style="color: rgba(0,0,0,.75);">
                 {% blocktrans trimmed asvar assist_msg %}
-                If you need help, please use our web form at {start_anchor_web}{{ support_url }}{end_anchor} or email {start_anchor_email}{{ support_email }}{end_anchor}.
+                    Si necesitas ayuda, utiliza nuestro formulario web en o envía un correo electrónico a contacto@mexicox.gob.mx.
                 {% endblocktrans %}
                 {% interpolate_html assist_msg start_anchor_web='<a href="'|add:support_url|add:'">'|safe start_anchor_email='<a href="mailto:'|add:support_email|add:'">'|safe end_anchor='</a>'|safe %}
                 <br />
@@ -61,11 +61,26 @@
         <td>
             <p style="color: rgba(0,0,0,.75);">
                 {% filter force_escape %}
-                    {% blocktrans %}This email message was automatically sent by {{ lms_url }} because someone attempted to create an account on {{ platform_name }} using this email address.{% endblocktrans %}
+                    {% blocktrans %}
+                    Este mensaje de correo electrónico fue enviado automáticamente por https://mexicox.gob.mx porque alguien intentó crear una cuenta en MéxicoX usando esta dirección de correo electrónico.
+
+                    {% endblocktrans %}
                 {% endfilter %}
                 <br />
             </p>
         </td>
+    </tr>
+    <tr>
+        <td>
+            <p style="">
+                © 2025 MexicoX, Todos los derechos reservados.
+
+            </p>
+            <p>
+                MexicoX - https://mexicox.gob.mx
+            </p>
+        </td>
+
     </tr>
 </table>
 {% endblock %}
