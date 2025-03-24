@@ -308,6 +308,19 @@ def _update_social_context(request, context, course, user_certificate, platform_
             course.display_name, user_certificate.mode, smart_str(share_url), certificate=user_certificate
         )
 
+def _update_context_with_user_score(context, user, user_certificate):
+
+    try:
+
+
+         if context['display_score']:
+            context['score_available'] = True
+            from lms.djangoapps.grades.api import CourseGradeFactory
+            for user, course_grade, exc in CourseGradeFactory().iter(
+                    [user], course_key=user_certificate.course_id):
+                context['course_grade']= "{:.0f}".format(course_grade.percent*100)
+    except Exception as e:
+         context['score_available'] = False
 
 def _update_context_with_user_info(context, user, user_certificate):
     """
@@ -410,6 +423,8 @@ def _update_organization_context(context, course):
         course_org_display = course_org_display or organization.get('short_name')
         organization_logo = organization.get('logo', None)
     partner_short_name = course_org_display or course.org
+    partner_desc_name = organization.get('description', partner_short_name)
+    context['accomplishment_copy_course_org_2'] = partner_desc_name
 
     context['organization_long_name'] = partner_long_name
     context['organization_short_name'] = partner_short_name
@@ -580,6 +595,9 @@ def render_html_view(request, course_id, certificate=None):  # pylint: disable=t
 
         # Append/Override the existing view context values with any course-specific static values from Advanced Settings
         context.update(course.cert_html_view_overrides)
+        ##FIX TO CALIFICATION
+        _update_context_with_user_score(context, user, user_certificate)
+
 
         # Track certificate view events
         _track_certificate_events(request, course, user, user_certificate)
