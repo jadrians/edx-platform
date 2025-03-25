@@ -309,17 +309,22 @@ def _update_social_context(request, context, course, user_certificate, platform_
         )
 
 def _update_context_with_user_score(context, user, user_certificate):
-
     try:
-# Verifica si display_score está habilitado
-         if context.get('display_score', False):
-            context['score_available'] = True
+        if context.get('display_score', False):  # Verifica si display_score existe en el contexto
+            context['score_available'] = False  # Inicializa en False
             from lms.djangoapps.grades.api import CourseGradeFactory
             for user, course_grade, exc in CourseGradeFactory().iter(
                     [user], course_key=user_certificate.course_id):
-                context['course_grade']= "{:.0f}".format(course_grade.percent*100)
+                if course_grade and course_grade.percent is not None:
+                    context['course_grade'] = "{:.0f}".format(course_grade.percent * 100)
+                    context['score_available'] = True  # Solo si se obtiene una calificación válida
+                else:
+                    context['course_grade'] = "N/A"  # Evita errores en la plantilla
     except Exception as e:
-         context['score_available'] = False
+        context['score_available'] = False
+        context['course_grade'] = "N/A"  # Asegura que siempre haya un valor
+
+
 
 def _update_context_with_user_info(context, user, user_certificate):
     """
