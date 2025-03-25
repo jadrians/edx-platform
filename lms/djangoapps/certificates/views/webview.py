@@ -313,7 +313,7 @@ def _update_context_with_user_score(context, user, user_certificate):
     try:
 
 
-         if context['display_score']:
+         if context['display_score', False]:
             context['score_available'] = True
             from lms.djangoapps.grades.api import CourseGradeFactory
             for user, course_grade, exc in CourseGradeFactory().iter(
