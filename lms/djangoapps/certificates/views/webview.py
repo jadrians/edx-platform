@@ -310,14 +310,14 @@ def _update_social_context(request, context, course, user_certificate, platform_
 
 def _update_context_with_user_score(context, user, user_certificate):
     
-    if context.get('full_theme', False):
-            context['full_theme'] = False
+    if context.get('fullTheme', False):
+            context['fullTheme'] = False
     else:
-            context['full_theme'] = True
+            context['fullTheme'] = True
     
     try:
 
-        if context.get('display_score', False):  # Verifica si display_score existe en el contexto
+        if context.get('displayScore', False):  # Verifica si displayScore existe en el contexto
             context['score_available'] = False  # Inicializa en False
             from lms.djangoapps.grades.api import CourseGradeFactory
             for user, course_grade, exc in CourseGradeFactory().iter(
