@@ -309,7 +309,14 @@ def _update_social_context(request, context, course, user_certificate, platform_
         )
 
 def _update_context_with_user_score(context, user, user_certificate):
+    
+    if context.get('full_theme', False):
+            context['full_theme'] = False
+    else:
+            context['full_theme'] = True
+    
     try:
+
         if context.get('display_score', False):  # Verifica si display_score existe en el contexto
             context['score_available'] = False  # Inicializa en False
             from lms.djangoapps.grades.api import CourseGradeFactory
@@ -599,7 +606,7 @@ def render_html_view(request, course_id, certificate=None):  # pylint: disable=t
 
         # Append/Override the existing view context values with any course-specific static values from Advanced Settings
         context.update(course.cert_html_view_overrides)
-        context['display_score'] = True  # Cambia a False si no deseas mostrar la calificación
+        # Cambia a False si no deseas mostrar la calificación
         ##FIX TO CALIFICATION
         _update_context_with_user_score(context, user, user_certificate)
 
