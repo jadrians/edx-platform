@@ -1277,7 +1277,7 @@ class TestInstructorAPIEnrollment(SharedModuleStoreTestCase, LoginEnrollmentTest
 
         # Check the outbox
         assert len(mail.outbox) == 1
-        assert mail.outbox[0].subject == f'You have been invited to register for {self.course.display_name}'
+        assert mail.outbox[0].subject == f'Usted ha sido invitado a registrarse para {self.course.display_name}'
 
         text_body = mail.outbox[0].body
         html_body = mail.outbox[0].alternatives[0][0]
@@ -1359,7 +1359,7 @@ class TestInstructorAPIEnrollment(SharedModuleStoreTestCase, LoginEnrollmentTest
 
         # Check the outbox
         assert len(mail.outbox) == 1
-        assert mail.outbox[0].subject == f'You have been invited to register for {self.course.display_name}'
+        assert mail.outbox[0].subject == f'Usted ha sido invitado a registrarse para {self.course.display_name}'
         manual_enrollments = ManualEnrollmentAudit.objects.all()
         assert manual_enrollments.count() == 1
         assert manual_enrollments[0].state_transition == UNENROLLED_TO_ALLOWEDTOENROLL
@@ -1561,7 +1561,7 @@ class TestInstructorAPIEnrollment(SharedModuleStoreTestCase, LoginEnrollmentTest
 
         # Check the outbox
         assert len(mail.outbox) == 1
-        assert mail.outbox[0].subject == f'You have been invited to register for {self.course.display_name}'
+        assert mail.outbox[0].subject == f'Usted ha sido invitado a registrarse para {self.course.display_name}'
 
         text_body = mail.outbox[0].body
         html_body = mail.outbox[0].alternatives[0][0]
@@ -1624,7 +1624,7 @@ class TestInstructorAPIEnrollment(SharedModuleStoreTestCase, LoginEnrollmentTest
 
         # Check the outbox
         assert len(mail.outbox) == 1
-        assert mail.outbox[0].subject == f'You have been invited to register for {self.course.display_name}'
+        assert mail.outbox[0].subject == f'Usted ha sido invitado a registrarse para {self.course.display_name}'
 
         text_body = mail.outbox[0].body
         html_body = mail.outbox[0].alternatives[0][0]
