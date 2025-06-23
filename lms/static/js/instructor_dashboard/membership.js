@@ -623,7 +623,6 @@ such that the value can be defined later than this assignment (file load order).
               var contenido =batchEnroll.$identifier_input.val().replace("\r",",").replace("\n",",");
               var listado = contenido.split(",");
               console.log(batchEnroll.$identifier_input.val())
-              alert(",")
               this.$clear_error = false;
               var response = null;
               var sublistado = "";
